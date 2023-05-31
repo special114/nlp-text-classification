@@ -39,24 +39,15 @@ class DistilBertModel(Model):
 
         training_args = TrainingArguments(
             output_dir=output_name if output_name is not None else DEFAULT_MODEL_NAME,
-            # learning_rate=2e-5,
-            # per_device_train_batch_size=16,
-            # per_device_eval_batch_size=16,
-            # num_train_epochs=2,
-            # weight_decay=0.01,
-            # # evaluation_strategy="epoch",
             save_strategy="epoch",
-            # load_best_model_at_end=True,
         )
 
         trainer = Trainer(
             model=self.model,
             args=training_args,
             train_dataset=train,
-            # eval_dataset=test,
             tokenizer=self.tokenizer,
             data_collator=data_collator,
-            # compute_metrics=compute_metrics,
         )
 
         self.device = trainer.model.device
